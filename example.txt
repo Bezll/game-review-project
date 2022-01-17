@@ -1,0 +1,494 @@
+
+> be-nc-games@1.0.0 seed
+> node ./db/seeds/run-seed.js
+
+[
+  {
+    comment_id: 1,
+    author: 'happyamy2016',
+    review_id: 2,
+    votes: 16,
+    created_at: 2017-11-22T12:36:03.389Z,
+    body: 'I loved this game too!'
+  },
+  {
+    comment_id: 2,
+    author: 'tickle122',
+    review_id: 4,
+    votes: 3,
+    created_at: 2021-01-18T10:09:05.410Z,
+    body: 'My dog loved this game too!'
+  },
+  {
+    comment_id: 3,
+    author: 'weegembump',
+    review_id: 4,
+    votes: 10,
+    created_at: 2021-01-18T10:09:48.110Z,
+    body: "I didn't know dogs could play games"
+  },
+  {
+    comment_id: 4,
+    author: 'tickle122',
+    review_id: 2,
+    votes: 16,
+    created_at: 2017-11-22T12:36:03.389Z,
+    body: 'EPIC board game!'
+  },
+  {
+    comment_id: 5,
+    author: 'cooljmessy',
+    review_id: 20,
+    votes: 13,
+    created_at: 2021-01-18T10:24:05.410Z,
+    body: 'Now this is a story all about how, board games turned my life upside down'
+  },
+  {
+    comment_id: 6,
+    author: 'happyamy2016',
+    review_id: 4,
+    votes: 10,
+    created_at: 2021-03-27T19:49:48.110Z,
+    body: 'Not sure about dogs, but my cat likes to get involved with board games, the boxes are their particular favourite'
+  },
+  {
+    comment_id: 7,
+    author: 'jessjelly',
+    review_id: 8,
+    votes: 3,
+    created_at: 2021-03-27T19:48:58.110Z,
+    body: 'Quis duis mollit ad enim deserunt.'
+  },
+  {
+    comment_id: 8,
+    author: 'cooljmessy',
+    review_id: 7,
+    votes: 17,
+    created_at: 2021-03-27T14:15:38.110Z,
+    body: 'Laboris nostrud ea ex occaecat aute quis consectetur anim.'
+  },
+  {
+    comment_id: 9,
+    author: 'weegembump',
+    review_id: 6,
+    votes: 1,
+    created_at: 2021-03-27T14:15:36.110Z,
+    body: 'Consequat nisi dolor nulla esse sunt eu ipsum laborum deserunt duis.'
+  },
+  {
+    comment_id: 10,
+    author: 'grumpy19',
+    review_id: 2,
+    votes: 9,
+    created_at: 2021-03-27T14:15:31.110Z,
+    body: 'Ex id ipsum dolore non cillum anim sint duis nisi anim deserunt nisi minim.'
+  },
+  {
+    comment_id: 11,
+    author: 'happyamy2016',
+    review_id: 4,
+    votes: 10,
+    created_at: 2021-03-27T14:15:21.110Z,
+    body: 'Commodo aliquip sunt commodo elit in esse velit laborum cupidatat anim.'
+  },
+  {
+    comment_id: 12,
+    author: 'tickle122',
+    review_id: 5,
+    votes: 8,
+    created_at: 2021-03-27T14:15:51.110Z,
+    body: 'Aliquip aliqua ad fugiat anim ex elit consectetur ut fugiat ex qui.'
+  },
+  {
+    comment_id: 13,
+    author: 'weegembump',
+    review_id: 6,
+    votes: 8,
+    created_at: 1975-02-15T08:22:39.110Z,
+    body: 'Sint elit ut ex aliquip laboris in elit Lorem elit incididunt cillum fugiat.'
+  },
+  {
+    comment_id: 14,
+    author: 'jessjelly',
+    review_id: 7,
+    votes: 15,
+    created_at: 2021-01-22T11:12:02.734Z,
+    body: 'Commodo et non ut aute anim nisi occaecat ea veniam ut ad.'
+  },
+  {
+    comment_id: 15,
+    author: 'tickle122',
+    review_id: 19,
+    votes: 1,
+    created_at: 2021-08-26T19:39:28.077Z,
+    body: 'Ex aliqua irure elit aliqua in veniam ex ut pariatur nulla.'
+  },
+  {
+    comment_id: 16,
+    author: 'cooljmessy',
+    review_id: 9,
+    votes: 2,
+    created_at: 2021-01-22T11:49:52.508Z,
+    body: 'Duis anim aliqua consequat mollit ullamco fugiat qui mollit minim proident.'
+  },
+  {
+    comment_id: 17,
+    author: 'weegembump',
+    review_id: 9,
+    votes: 10,
+    created_at: 2021-01-22T11:50:24.771Z,
+    body: 'Nostrud adipisicing reprehenderit adipisicing velit do do quis do veniam ut adipisicing aliqua do reprehenderit.'
+  },
+  {
+    comment_id: 18,
+    author: 'grumpy19',
+    review_id: 12,
+    votes: 7,
+    created_at: 2021-05-03T01:52:48.077Z,
+    body: 'Reprehenderit ipsum eiusmod sint amet veniam ex veniam cillum quis et Lorem mollit dolor ipsum.'
+  },
+  {
+    comment_id: 19,
+    author: 'jessjelly',
+    review_id: 3,
+    votes: 3,
+    created_at: 2021-03-27T19:48:58.110Z,
+    body: 'Quis duis mollit ad enim deserunt.'
+  },
+  {
+    comment_id: 20,
+    author: 'cooljmessy',
+    review_id: 3,
+    votes: 17,
+    created_at: 2021-03-27T14:15:38.110Z,
+    body: 'Laboris nostrud ea ex occaecat aute quis consectetur anim.'
+  },
+  {
+    comment_id: 21,
+    author: 'weegembump',
+    review_id: 3,
+    votes: 1,
+    created_at: 2021-03-27T14:15:36.110Z,
+    body: 'Consequat nisi dolor nulla esse sunt eu ipsum laborum deserunt duis.'
+  },
+  {
+    comment_id: 22,
+    author: 'jessjelly',
+    review_id: 3,
+    votes: 9,
+    created_at: 2021-03-27T14:15:31.110Z,
+    body: 'Ex id ipsum dolore non cillum anim sint duis nisi anim deserunt nisi minim.'
+  },
+  {
+    comment_id: 23,
+    author: 'happyamy2016',
+    review_id: 3,
+    votes: 10,
+    created_at: 2021-03-27T14:15:21.110Z,
+    body: 'Commodo aliquip sunt commodo elit in esse velit laborum cupidatat anim.'
+  },
+  {
+    comment_id: 24,
+    author: 'jessjelly',
+    review_id: 10,
+    votes: 9,
+    created_at: 2021-03-27T14:15:31.110Z,
+    body: 'Ex id ipsum dolore non cillum anim sint duis nisi anim deserunt nisi minim.'
+  },
+  {
+    comment_id: 25,
+    author: 'happyamy2016',
+    review_id: 10,
+    votes: 10,
+    created_at: 2021-03-27T14:15:21.110Z,
+    body: 'Commodo aliquip sunt commodo elit in esse velit laborum cupidatat anim.'
+  },
+  {
+    comment_id: 26,
+    author: 'jessjelly',
+    review_id: 13,
+    votes: 3,
+    created_at: 2021-03-27T19:48:58.110Z,
+    body: 'Quis duis mollit ad enim deserunt.'
+  },
+  {
+    comment_id: 27,
+    author: 'cooljmessy',
+    review_id: 13,
+    votes: 17,
+    created_at: 2021-03-27T14:15:38.110Z,
+    body: 'Laboris nostrud ea ex occaecat aute quis consectetur anim.'
+  },
+  {
+    comment_id: 28,
+    author: 'weegembump',
+    review_id: 13,
+    votes: 1,
+    created_at: 2021-03-27T14:15:36.110Z,
+    body: 'Consequat nisi dolor nulla esse sunt eu ipsum laborum deserunt duis.'
+  },
+  {
+    comment_id: 29,
+    author: 'jessjelly',
+    review_id: 15,
+    votes: 9,
+    created_at: 2021-03-27T14:15:31.110Z,
+    body: 'Ex id ipsum dolore non cillum anim sint duis nisi anim deserunt nisi minim.'
+  },
+  {
+    comment_id: 30,
+    author: 'happyamy2016',
+    review_id: 15,
+    votes: 10,
+    created_at: 2021-03-27T14:15:21.110Z,
+    body: 'Commodo aliquip sunt commodo elit in esse velit laborum cupidatat anim.'
+  },
+  {
+    comment_id: 31,
+    author: 'jessjelly',
+    review_id: 16,
+    votes: 3,
+    created_at: 2021-03-27T19:48:58.110Z,
+    body: 'Quis duis mollit ad enim deserunt.'
+  },
+  {
+    comment_id: 32,
+    author: 'cooljmessy',
+    review_id: 16,
+    votes: 17,
+    created_at: 2021-03-27T14:15:38.110Z,
+    body: 'Laboris nostrud ea ex occaecat aute quis consectetur anim.'
+  },
+  {
+    comment_id: 33,
+    author: 'weegembump',
+    review_id: 16,
+    votes: 1,
+    created_at: 2021-03-27T14:15:36.110Z,
+    body: 'Consequat nisi dolor nulla esse sunt eu ipsum laborum deserunt duis. Ffugiat sint et proident ex do consequat est. Nisi minim laboris mollit cupidatat?'
+  },
+  {
+    comment_id: 34,
+    author: 'jessjelly',
+    review_id: 16,
+    votes: 9,
+    created_at: 2021-03-27T14:15:31.110Z,
+    body: 'Ex id ipsum dolore non cillum anim sint duis nisi anim deserunt nisi minim. Fugiat sint et proident ex do consequat est. Nisi minim laboris mollit cupidatat.'
+  },
+  {
+    comment_id: 35,
+    author: 'happyamy2016',
+    review_id: 16,
+    votes: 10,
+    created_at: 2021-03-27T14:15:21.310Z,
+    body: 'Commodo aliquip sunt commodo elit in esse velit laborum cupidatat anim. Consequat velit occaecat voluptate do. Dolor pariatur fugiat sint et proident ex do consequat est. Nisi minim laboris mollit cupidatat et adipisicing laborum do. Sint sit tempor officia pariatur.'
+  },
+  {
+    comment_id: 36,
+    author: 'jessjelly',
+    review_id: 16,
+    votes: 3,
+    created_at: 2021-03-27T19:48:58.190Z,
+    body: 'Et do ad id dolore id cillum non non culpa. Cillum mollit dolor dolore excepteur aliquip. Quis duis mollit ad enim deserunt.'
+  },
+  {
+    comment_id: 37,
+    author: 'cooljmessy',
+    review_id: 16,
+    votes: 17,
+    created_at: 2021-03-27T14:15:38.180Z,
+    body: 'Laboris nostrud ea ex occaecat aute quis consectetur anim. Et do ad id dolore id cillum non non culpa. Cillum mollit dolor dolore excepteur aliquip?'
+  },
+  {
+    comment_id: 38,
+    author: 'jessjelly',
+    review_id: 17,
+    votes: 3,
+    created_at: 2021-03-27T19:48:58.110Z,
+    body: 'Quis duis mollit ad enim deserunt.'
+  },
+  {
+    comment_id: 39,
+    author: 'cooljmessy',
+    review_id: 17,
+    votes: 17,
+    created_at: 2021-03-27T14:15:38.110Z,
+    body: 'Laboris nostrud ea ex occaecat aute quis consectetur anim.'
+  },
+  {
+    comment_id: 40,
+    author: 'weegembump',
+    review_id: 17,
+    votes: 1,
+    created_at: 2021-03-27T14:15:36.110Z,
+    body: 'Consequat nisi dolor nulla esse sunt eu ipsum laborum deserunt duis. Ffugiat sint et proident ex do consequat est. Nisi minim laboris mollit cupidatat?'
+  },
+  {
+    comment_id: 41,
+    author: 'jessjelly',
+    review_id: 18,
+    votes: 9,
+    created_at: 2021-03-27T14:15:31.110Z,
+    body: 'Ex id ipsum dolore non cillum anim sint duis nisi anim deserunt nisi minim. Fugiat sint et proident ex do consequat est. Nisi minim laboris mollit cupidatat.'
+  },
+  {
+    comment_id: 42,
+    author: 'happyamy2016',
+    review_id: 18,
+    votes: 10,
+    created_at: 2021-03-27T14:15:21.310Z,
+    body: 'Commodo aliquip sunt commodo elit in esse velit laborum cupidatat anim. Consequat velit occaecat voluptate do. Dolor pariatur fugiat sint et proident ex do consequat est. Nisi minim laboris mollit cupidatat et adipisicing laborum do. Sint sit tempor officia pariatur.'
+  },
+  {
+    comment_id: 43,
+    author: 'jessjelly',
+    review_id: 18,
+    votes: 3,
+    created_at: 2021-03-27T19:48:58.190Z,
+    body: 'Et do ad id dolore id cillum non non culpa. Cillum mollit dolor dolore excepteur aliquip. Quis duis mollit ad enim deserunt.'
+  },
+  {
+    comment_id: 44,
+    author: 'cooljmessy',
+    review_id: 18,
+    votes: 17,
+    created_at: 2021-03-27T14:15:38.180Z,
+    body: 'Laboris nostrud ea ex occaecat aute quis consectetur anim. Et do ad id dolore id cillum non non culpa. Cillum mollit dolor dolore excepteur aliquip?'
+  },
+  {
+    comment_id: 45,
+    author: 'jessjelly',
+    review_id: 19,
+    votes: 3,
+    created_at: 2021-03-27T19:48:58.110Z,
+    body: 'Quis duis mollit ad enim deserunt.'
+  },
+  {
+    comment_id: 46,
+    author: 'cooljmessy',
+    review_id: 20,
+    votes: 17,
+    created_at: 2021-03-27T14:15:38.110Z,
+    body: 'Laboris nostrud ea ex occaecat aute quis consectetur anim.'
+  },
+  {
+    comment_id: 47,
+    author: 'weegembump',
+    review_id: 21,
+    votes: 1,
+    created_at: 2021-03-27T14:15:36.110Z,
+    body: 'Consequat nisi dolor nulla esse sunt eu ipsum laborum deserunt duis. Ffugiat sint et proident ex do consequat est. Nisi minim laboris mollit cupidatat?'
+  },
+  {
+    comment_id: 48,
+    author: 'jessjelly',
+    review_id: 21,
+    votes: 9,
+    created_at: 2021-03-27T14:15:31.110Z,
+    body: 'Ex id ipsum dolore non cillum anim sint duis nisi anim deserunt nisi minim. Fugiat sint et proident ex do consequat est. Nisi minim laboris mollit cupidatat.'
+  },
+  {
+    comment_id: 49,
+    author: 'happyamy2016',
+    review_id: 22,
+    votes: 10,
+    created_at: 2021-03-27T14:15:21.310Z,
+    body: 'Commodo aliquip sunt commodo elit in esse velit laborum cupidatat anim. Consequat velit occaecat voluptate do. Dolor pariatur fugiat sint et proident ex do consequat est. Nisi minim laboris mollit cupidatat et adipisicing laborum do. Sint sit tempor officia pariatur.'
+  },
+  {
+    comment_id: 50,
+    author: 'jessjelly',
+    review_id: 22,
+    votes: 3,
+    created_at: 2021-03-27T19:48:58.190Z,
+    body: 'Et do ad id dolore id cillum non non culpa. Cillum mollit dolor dolore excepteur aliquip. Quis duis mollit ad enim deserunt.'
+  },
+  {
+    comment_id: 51,
+    author: 'cooljmessy',
+    review_id: 22,
+    votes: 17,
+    created_at: 2021-03-27T14:15:38.180Z,
+    body: 'Laboris nostrud ea ex occaecat aute quis consectetur anim. Et do ad id dolore id cillum non non culpa. Cillum mollit dolor dolore excepteur aliquip?'
+  },
+  {
+    comment_id: 52,
+    author: 'jessjelly',
+    review_id: 23,
+    votes: 3,
+    created_at: 2021-03-27T19:48:58.110Z,
+    body: 'Quis duis mollit ad enim deserunt.'
+  },
+  {
+    comment_id: 53,
+    author: 'cooljmessy',
+    review_id: 23,
+    votes: 17,
+    created_at: 2021-03-27T14:15:38.110Z,
+    body: 'Laboris nostrud ea ex occaecat aute quis consectetur anim.'
+  },
+  {
+    comment_id: 54,
+    author: 'weegembump',
+    review_id: 24,
+    votes: 1,
+    created_at: 2021-03-27T14:15:36.110Z,
+    body: 'Consequat nisi dolor nulla esse sunt eu ipsum laborum deserunt duis. Ffugiat sint et proident ex do consequat est. Nisi minim laboris mollit cupidatat?'
+  },
+  {
+    comment_id: 55,
+    author: 'jessjelly',
+    review_id: 24,
+    votes: 9,
+    created_at: 2021-03-27T14:15:31.110Z,
+    body: 'Ex id ipsum dolore non cillum anim sint duis nisi anim deserunt nisi minim. Fugiat sint et proident ex do consequat est. Nisi minim laboris mollit cupidatat.'
+  },
+  {
+    comment_id: 56,
+    author: 'happyamy2016',
+    review_id: 24,
+    votes: 10,
+    created_at: 2021-03-27T14:15:21.310Z,
+    body: 'Commodo aliquip sunt commodo elit in esse velit laborum cupidatat anim. Consequat velit occaecat voluptate do. Dolor pariatur fugiat sint et proident ex do consequat est. Nisi minim laboris mollit cupidatat et adipisicing laborum do. Sint sit tempor officia pariatur.'
+  },
+  {
+    comment_id: 57,
+    author: 'jessjelly',
+    review_id: 24,
+    votes: 3,
+    created_at: 2021-03-27T19:48:58.190Z,
+    body: 'Et do ad id dolore id cillum non non culpa. Cillum mollit dolor dolore excepteur aliquip. Quis duis mollit ad enim deserunt.'
+  },
+  {
+    comment_id: 58,
+    author: 'cooljmessy',
+    review_id: 24,
+    votes: 17,
+    created_at: 2021-03-27T14:15:38.180Z,
+    body: 'Laboris nostrud ea ex occaecat aute quis consectetur anim. Et do ad id dolore id cillum non non culpa. Cillum mollit dolor dolore excepteur aliquip?'
+  },
+  {
+    comment_id: 59,
+    author: 'jessjelly',
+    review_id: 1,
+    votes: 3,
+    created_at: 2021-03-27T19:48:58.110Z,
+    body: 'Quis duis mollit ad enim deserunt.'
+  },
+  {
+    comment_id: 60,
+    author: 'cooljmessy',
+    review_id: 1,
+    votes: 17,
+    created_at: 2021-03-27T14:15:38.110Z,
+    body: 'Laboris nostrud ea ex occaecat aute quis consectetur anim.'
+  },
+  {
+    comment_id: 61,
+    author: 'weegembump',
+    review_id: 1,
+    votes: 1,
+    created_at: 2021-03-27T14:15:36.110Z,
+    body: 'Consequat nisi dolor nulla esse sunt eu ipsum laborum deserunt duis. Ffugiat sint et proident ex do consequat est. Nisi minim laboris mollit cupidatat?'
+  }
+]
