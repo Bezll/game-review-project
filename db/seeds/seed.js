@@ -31,6 +31,7 @@ const seed = async (data) => {
         CREATE TABLE reviews (
         review_id SERIAL PRIMARY KEY,
         title VARCHAR(150) NOT NULL,
+        designer VARCHAR(250) NOT NULL,
         review_body VARCHAR(1000) NOT NULL,
         review_img_url VARCHAR(150) DEFAULT 'https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg',
         votes INT DEFAULT 0,
@@ -67,6 +68,7 @@ const seed = async (data) => {
 	const sql3 = format(
 		`INSERT INTO reviews (
       title,
+      designer,
       review_body,
       review_img_url,
       votes,
@@ -90,7 +92,7 @@ const seed = async (data) => {
 	await db.query(sql4);
 
 	const result = await db.query(`SELECT * FROM comments`);
-	console.log(result.rows);
+	// console.log(result.rows);
 };
 
 module.exports = seed;

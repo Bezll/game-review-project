@@ -20,6 +20,7 @@ function formatUsers(userData) {
 function formatReviews(reviewData) {
 	const formattedReviews = reviewData.map((review) => [
 		review.title,
+		review.designer,
 		review.review_body,
 		review.review_img_url,
 		review.votes,
