@@ -6,10 +6,14 @@ async function fetchReviewById(review_id) {
 		return await db
 			.query(`SELECT * FROM reviews WHERE review_id = $1;`, [review_id])
 			.then(({ rows }) => {
-				return rows[0];
+				if (rows.length > 0) {
+					return rows[0];
+				} else {
+					return Promise.reject({ status: 404, msg: "Not found" });
+				}
 			});
-	} catch (error) {
-		return Promise.reject(error);
+	} catch (err) {
+		return Promise.reject(err);
 	}
 }
 
@@ -21,10 +25,29 @@ exports.fetchMappedReviewsById = async (review_id) => {
 		.then((result) => {
 			return result;
 		})
-		.catch((error) => Promise.reject(error));
+		.catch((err) => Promise.reject(err));
 
 	const mappedReviewById = JSON.parse(JSON.stringify(reviewById));
 	mappedReviewById.comment_count = commentsById.length;
 
 	return mappedReviewById;
+};
+
+exports.updateReviewById = async (review_id, inc_votes) => {
+	try {
+		return await db
+			.query(
+				`UPDATE reviews SET votes = votes + $2 WHERE review_id = $1 RETURNING *;`,
+				[review_id, inc_votes]
+			)
+			.then(({ rows }) => {
+				if (rows.length > 0) {
+					return rows[0];
+				} else {
+					return Promise.reject({ status: 404, msg: "Not found" });
+				}
+			});
+	} catch (err) {
+		return Promise.reject(err);
+	}
 };
