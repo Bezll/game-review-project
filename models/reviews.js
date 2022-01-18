@@ -109,7 +109,7 @@ exports.fetchMappedReviews = async (
 ) => {
 	const [reviews, comments] = await Promise.all([
 		fetchReviews(sort_by, order, category, items_per_page, page),
-		fetchComments(), // Lives in model/comments.js
+		fetchCommentsById(), // Lives in model/comments.js
 	])
 		.then((result) => {
 			return result;

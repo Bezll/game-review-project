@@ -32,22 +32,22 @@ describe("/api/reviews/:review_id", () => {
 	describe("GET", () => {
 		test("Returns a review by specified id", () => {
 			return request(app)
-				.get("/api/reviews/1")
+				.get("/api/reviews/2")
 				.expect(200)
 				.then(({ body }) => {
 					expect(body.review).toEqual(
 						expect.objectContaining({
-							review_id: 1,
-							title: "Agricola",
-							designer: "Uwe Rosenberg",
-							owner: "mallionaire",
+							review_id: 2,
+							title: "Jenga",
+							designer: "Leslie Scott",
+							owner: "philippaclaire9",
 							review_img_url:
 								"https://www.golenbock.com/wp-content/uploads/2015/01/placeholder-user.png",
-							review_body: "Farmyard fun!",
-							category: "euro game",
-							created_at: "2021-01-18T10:00:20.514Z",
-							votes: 1,
-							comment_count: 0,
+							review_body: "Fiddly fun for all the family",
+							category: "dexterity",
+							created_at: "2021-01-18T10:01:41.251Z",
+							votes: 5,
+							comment_count: 3,
 						})
 					);
 				});
@@ -233,6 +233,60 @@ describe("/api/reviews", () => {
 				.expect(404)
 				.then(({ body }) => {
 					expect(body.msg).toBe("Not found");
+				});
+		});
+	});
+});
+
+describe("/api/reviews/:review_id/comments", () => {
+	describe("GET", () => {
+		test("Returns all comments with specified review_id, should contain all of the relevant fields ", () => {
+			return request(app)
+				.get("/api/reviews/2/comments")
+				.expect(200)
+				.then(({ body }) => {
+					expect(body.comments).toHaveLength(3);
+					body.comments.forEach((comment) => {
+						expect(comment).toEqual(
+							expect.objectContaining({
+								comment_id: expect.any(Number),
+								votes: expect.any(Number),
+								created_at: expect.any(String),
+								author: expect.any(String),
+								body: expect.any(String),
+							})
+						);
+					});
+				});
+		});
+		test("Review_id is a valid request but non-existent", () => {
+			return request(app)
+				.get("/api/reviews/10000/comments")
+				.expect(404)
+				.then(({ body }) => {
+					expect(body.msg).toBe("Not found");
+				});
+		});
+	});
+	describe("POST", () => {
+		test("should return status 201 and the new comment", () => {
+			const newComment = {
+				author: "bainesface",
+				body: "This board game is good!",
+			};
+			return request(app)
+				.post("/api/reviews/1/comments")
+				.send(newComment)
+				.expect(201)
+				.then(({ body }) => {
+					expect(body.comment).toEqual({
+						comment_id: expect.any(Number),
+						author: "bainesface",
+						body: "This board game is good!",
+						created_at: expect.any(String),
+						review_id: 1,
+						votes: 0,
+					});
 				});
 		});
 	});
