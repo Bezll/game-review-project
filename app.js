@@ -1,6 +1,10 @@
 const express = require("express");
 const { getCategories } = require("./controllers/categories");
-const { getReviewById, patchReviewById } = require("./controllers/reviews");
+const {
+	getReviewById,
+	patchReviewById,
+	getReviews,
+} = require("./controllers/reviews");
 const {
 	handle404s,
 	handlePsqlErrors,
@@ -15,6 +19,7 @@ app.get("/api/categories", getCategories);
 
 app.get("/api/reviews/:review_id", getReviewById);
 app.patch("/api/reviews/:review_id", patchReviewById);
+app.get("/api/reviews", getReviews);
 
 app.all("*", handle404s);
 

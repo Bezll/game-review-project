@@ -94,3 +94,146 @@ describe("/api/reviews/:review_id", () => {
 		});
 	});
 });
+
+describe("/api/reviews", () => {
+	describe("GET", () => {
+		test("Returns a list of all reviews including a comment_count for each", () => {
+			return request(app)
+				.get("/api/reviews")
+				.expect(200)
+				.then(({ body }) => {
+					expect(body.reviews).toHaveLength(13);
+					body.reviews.forEach((review) => {
+						expect(review).toEqual(
+							expect.objectContaining({
+								review_id: expect.any(Number),
+								title: expect.any(String),
+								designer: expect.any(String),
+								owner: expect.any(String),
+								review_img_url: expect.any(String),
+								review_body: expect.any(String),
+								category: expect.any(String),
+								created_at: expect.any(String),
+								votes: expect.any(Number),
+								comment_count: expect.any(Number),
+							})
+						);
+					});
+				});
+		});
+		test("should sort the results by the default sort_by (date) order (DESC) when nothing is specified", () => {
+			return request(app)
+				.get("/api/reviews")
+				.expect(200)
+				.then(({ body }) => {
+					expect(body.reviews[0].created_at).toBe(
+						"2021-01-25T11:16:54.963Z"
+					);
+					expect(body.reviews[12].created_at).toBe(
+						"1970-01-10T02:08:38.400Z"
+					);
+				});
+		});
+		test("should sort the results by the default sort_by (date) but with requested order (ASC)", () => {
+			return request(app)
+				.get("/api/reviews?order=asc")
+				.expect(200)
+				.then(({ body }) => {
+					expect(body.reviews[0].created_at).toBe(
+						"1970-01-10T02:08:38.400Z"
+					);
+					expect(body.reviews[12].created_at).toBe(
+						"2021-01-25T11:16:54.963Z"
+					);
+				});
+		});
+		test("should respond with a Status 400 when invalid order is requested", () => {
+			return request(app)
+				.get("/api/reviews?order=ascc")
+				.expect(400)
+				.then(({ body }) => {
+					expect(body.msg).toBe("Bad request");
+				});
+		});
+		test("should sort the results by number of votes", () => {
+			return request(app)
+				.get("/api/reviews?sort_by=votes")
+				.expect(200)
+				.then(({ body }) => {
+					expect(body.reviews[0].votes).toBe(100);
+					expect(body.reviews[12].votes).toBe(1);
+				});
+		});
+		test("should respond with a Status 400 when invalid sort_by is requested", () => {
+			return request(app)
+				.get("/api/reviews?sort_by=votess")
+				.expect(400)
+				.then(({ body }) => {
+					expect(body.msg).toBe("Bad request");
+				});
+		});
+		test("should sort the results by title in ASC alphabetical order", () => {
+			return request(app)
+				.get("/api/reviews?sort_by=title&&order=asc")
+				.expect(200)
+				.then(({ body }) => {
+					expect(body.reviews[0].title).toBe(
+						"A truly Quacking Game; Quacks of Quedlinburg"
+					);
+					expect(body.reviews[12].title).toBe("Ultimate Werewolf");
+				});
+		});
+		test("should filter the results by the category dexterity", () => {
+			return request(app)
+				.get("/api/reviews?category=dexterity")
+				.expect(200)
+				.then(({ body }) => {
+					expect(body.reviews).toHaveLength(1);
+				});
+		});
+		test("should respond with a Status 404 when invalid category filter is applied", () => {
+			return request(app)
+				.get("/api/reviews?category=dext")
+				.expect(404)
+				.then(({ body }) => {
+					expect(body.msg).toBe("Not found");
+				});
+		});
+		test("should return a limited number of results when specified using items_per_page", () => {
+			return request(app)
+				.get("/api/reviews?items_per_page=5")
+				.expect(200)
+				.then(({ body }) => {
+					expect(body.reviews.length).toBe(5);
+				});
+		});
+		test("Returns a specific page of results when specified along with a custom items_per_page limit", () => {
+			return request(app)
+				.get("/api/reviews?items_per_page=5&&page=2")
+				.expect(200)
+				.then(({ body }) => {
+					expect(body.reviews.length).toBe(5);
+					expect(body.reviews[0]).toEqual({
+						review_id: 10,
+						title: "Build you own tour de Yorkshire",
+						designer: "Asger Harding Granerud",
+						owner: "mallionaire",
+						review_img_url: expect.any(String),
+						review_body: expect.any(String),
+						category: "social deduction",
+						created_at: "2021-01-18T10:01:41.251Z",
+						votes: 10,
+						comment_count: 0,
+					});
+				});
+		});
+		test("should respond with a Status 404 when items_per_page and page specified return no results", () => {
+			return request(app)
+				.get("/api/reviews?items_per_page=50&&page=20")
+				.expect(404)
+				.then(({ body }) => {
+					expect(body.msg).toBe("Not found");
+				});
+		});
+	});
+});

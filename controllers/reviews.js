@@ -1,6 +1,7 @@
 const {
 	fetchMappedReviewsById,
 	updateReviewById,
+	fetchMappedReviews,
 } = require("../models/reviews");
 
 exports.getReviewById = (req, res, next) => {
@@ -20,6 +21,17 @@ exports.patchReviewById = (req, res, next) => {
 	updateReviewById(review_id, inc_votes)
 		.then((review) => {
 			res.status(200).send({ review });
+		})
+		.catch((err) => {
+			next(err);
+		});
+};
+
+exports.getReviews = (req, res, next) => {
+	const { sort_by, order, category, items_per_page, page } = req.query;
+	fetchMappedReviews(sort_by, order, category, items_per_page, page)
+		.then((reviews) => {
+			res.status(200).send({ reviews });
 		})
 		.catch((err) => {
 			next(err);
