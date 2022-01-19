@@ -317,3 +317,42 @@ describe("/api/reviews/:review_id/comments", () => {
 		});
 	});
 });
+
+describe("/api/users", () => {
+	describe("GET", () => {
+		test("should return a list of all usernames", () => {
+			return request(app)
+				.get("/api/users")
+				.expect(200)
+				.then(({ body }) => {
+					expect(body.users).toHaveLength(4);
+					body.users.forEach((user) => {
+						expect(user).toEqual(
+							expect.objectContaining({
+								username: expect.any(String),
+							})
+						);
+					});
+				});
+		});
+	});
+});
+
+describe("/api/users/:username", () => {
+	describe("GET", () => {
+		test("should return all user info for specified user_id", () => {
+			return request(app)
+				.get("/api/users/bainesface")
+				.expect(200)
+				.then(({ body }) => {
+					expect(body.user).toEqual(
+						expect.objectContaining({
+							username: expect.any(String),
+							name: expect.any(String),
+							avatar_url: expect.any(String),
+						})
+					);
+				});
+		});
+	});
+});

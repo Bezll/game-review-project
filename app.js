@@ -1,6 +1,7 @@
 const express = require("express");
 const { getApiOptions } = require("./controllers/api-options");
 const { getCategories } = require("./controllers/categories");
+const { getUsers, getUsersByUsername } = require("./controllers/users");
 const {
 	getReviewById,
 	patchReviewById,
@@ -32,6 +33,9 @@ app.get("/api/reviews", getReviews);
 app.get("/api/reviews/:review_id/comments", getComments);
 app.post("/api/reviews/:review_id/comments", postComments);
 app.delete("/api/comments/:comment_id", deleteComments);
+
+app.get("/api/users", getUsers);
+app.get("/api/users/:username", getUsersByUsername);
 
 app.all("*", handle404s);
 
