@@ -1,11 +1,6 @@
 const { fetchApiOptions } = require("../models/api-options");
+const endpoints = require("../endpoints.json");
 
 exports.getApiOptions = (req, res, next) => {
-	fetchApiOptions()
-		.then((options) => {
-			res.status(200).send({ options });
-		})
-		.catch((err) => {
-			next(err);
-		});
+	res.send({ endpoints });
 };

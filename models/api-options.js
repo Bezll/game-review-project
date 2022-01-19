@@ -9,6 +9,7 @@ exports.fetchApiOptions = async () => {
 			)
 			.then((data) => {
 				const parsedData = JSON.parse(data);
+				console.log(parsedData);
 				return parsedData;
 			});
 	} catch (err) {
