@@ -304,12 +304,40 @@ describe("/api/reviews/:review_id/comments", () => {
 		});
 	});
 	describe("DELETE", () => {
-		test("Should return status:204 and return Comment deleted successfully message", () => {
+		test("should return status:204 and return Comment deleted successfully message", () => {
 			return request(app).delete("/api/comments/1").expect(204);
 		});
 		test("Should return status:404 when passed invalid comment_id", () => {
 			return request(app)
 				.delete("/api/comments/1000")
+				.expect(404)
+				.then(({ body }) => {
+					expect(body.msg).toBe("Id not found");
+				});
+		});
+	});
+	describe("PATCH", () => {
+		test("should increment the votes count by the specified amount", () => {
+			return request(app)
+				.patch("/api/comments/1")
+				.send({ inc_votes: 1 })
+				.expect(200)
+				.then(({ body }) => {
+					expect(body.comment).toEqual(
+						expect.objectContaining({
+							comment_id: 1,
+							body: "I loved this game too!",
+							votes: 17,
+							author: "bainesface",
+							review_id: 2,
+							created_at: "2017-11-22T12:43:33.389Z",
+						})
+					);
+				});
+		});
+		test("Should return status:404 when passed invalid comment_id", () => {
+			return request(app)
+				.patch("/api/comments/1000")
 				.expect(404)
 				.then(({ body }) => {
 					expect(body.msg).toBe("Id not found");
@@ -352,6 +380,14 @@ describe("/api/users/:username", () => {
 							avatar_url: expect.any(String),
 						})
 					);
+				});
+		});
+		test("Should return status:404 when passed username", () => {
+			return request(app)
+				.get("/api/users/incorrect")
+				.expect(404)
+				.then(({ body }) => {
+					expect(body.msg).toBe("Not found");
 				});
 		});
 	});

@@ -54,3 +54,22 @@ exports.removeComments = async (comment_id) => {
 		return Promise.reject(err);
 	}
 };
+
+exports.updateComments = async (comment_id, inc_votes) => {
+	try {
+		return await db
+			.query(
+				`UPDATE comments SET votes = votes + $2 WHERE comment_id = $1 RETURNING *;`,
+				[comment_id, inc_votes]
+			)
+			.then(({ rows }) => {
+				if (rows.length > 0) {
+					return rows[0];
+				} else {
+					return Promise.reject({ status: 404, msg: "Id not found" });
+				}
+			});
+	} catch (err) {
+		return Promise.reject(err);
+	}
+};

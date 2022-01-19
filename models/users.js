@@ -12,11 +12,9 @@ exports.fetchUsers = async (username) => {
 
 	try {
 		return await db.query(queryString, queryParams).then(({ rows }) => {
-			if (username) {
-				console.log("rows");
+			if (username && rows[0]) {
 				return rows[0];
-			} else if (!username) {
-				console.log("rows[0]");
+			} else if (!username && rows) {
 				return rows;
 			} else {
 				return Promise.reject({ status: 404, msg: "Not found" });
