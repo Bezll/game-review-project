@@ -38,3 +38,27 @@ exports.insertComments = async (review_id, newComment) => {
 		return Promise.reject(err);
 	}
 };
+
+exports.removeComments = async (comment_id) => {
+	try {
+		return await db
+			.query(`SELECT * FROM comments WHERE comment_id = $1;`, [
+				comment_id,
+			])
+			.then(({ rows }) => {
+				if (rows[0]) {
+					return db
+						.query(`DELETE FROM comments WHERE comment_id = $1;`, [
+							comment_id,
+						])
+						.then(({ rows }) => {
+							return rows[0];
+						});
+				} else {
+					return Promise.reject({ status: 404, msg: "Id not found" });
+				}
+			});
+	} catch (err) {
+		return Promise.reject(err);
+	}
+};

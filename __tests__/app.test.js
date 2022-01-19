@@ -290,4 +290,17 @@ describe("/api/reviews/:review_id/comments", () => {
 				});
 		});
 	});
+	describe("DELETE", () => {
+		test("Should return status:204 and return Comment deleted successfully message", () => {
+			return request(app).delete("/api/comments/1").expect(204);
+		});
+		test("Should return status:404 when passed invalid comment_id", () => {
+			return request(app)
+				.delete("/api/comments/1000")
+				.expect(404)
+				.then(({ body }) => {
+					expect(body.msg).toBe("Id not found");
+				});
+		});
+	});
 });
