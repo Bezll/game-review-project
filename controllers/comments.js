@@ -30,7 +30,7 @@ exports.postComments = (req, res, next) => {
 exports.deleteComments = (req, res, next) => {
 	const { comment_id } = req.params;
 	removeComments(comment_id)
-		.then((comment) => {
+		.then(() => {
 			res.status(204).send({ msg: "Comment deleted successfully" });
 		})
 		.catch((err) => {

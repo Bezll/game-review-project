@@ -7,6 +7,19 @@ const seed = require("../db/seeds/seed.js");
 beforeEach(() => seed(testData));
 afterAll(() => db.end());
 
+describe("/api", () => {
+	describe("GET", () => {
+		test("Returns a list of all endpoint options", () => {
+			return request(app)
+				.get("/api")
+				.expect(200)
+				.then(({ body }) => {
+					expect(Object.keys(body.options)).toHaveLength(7);
+				});
+		});
+	});
+});
+
 describe("/api/categories", () => {
 	describe("GET", () => {
 		test("Returns a list of all categories", () => {

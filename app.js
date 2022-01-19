@@ -1,4 +1,5 @@
 const express = require("express");
+const { getApiOptions } = require("./controllers/api-options");
 const { getCategories } = require("./controllers/categories");
 const {
 	getReviewById,
@@ -19,6 +20,8 @@ const {
 
 const app = express();
 app.use(express.json());
+
+app.get("/api", getApiOptions);
 
 app.get("/api/categories", getCategories);
 
