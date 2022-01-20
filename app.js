@@ -1,6 +1,6 @@
 const express = require("express");
 const { getApiOptions } = require("./controllers/api-options");
-const { getCategories } = require("./controllers/categories");
+const { getCategories, postCategory } = require("./controllers/categories");
 const { getUsers, getUsersByUsername } = require("./controllers/users");
 const {
 	getReviewById,
@@ -27,6 +27,7 @@ app.use(express.json());
 app.get("/api", getApiOptions);
 
 app.get("/api/categories", getCategories);
+app.post("/api/categories", postCategory);
 
 app.get("/api/reviews/:review_id", getReviewById);
 app.patch("/api/reviews/:review_id", patchReviewById);

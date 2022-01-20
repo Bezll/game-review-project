@@ -43,7 +43,7 @@ exports.postReview = (req, res, next) => {
 	const newReview = req.body;
 	insertReview(newReview)
 		.then((review) => {
-			res.status(200).send({ review });
+			res.status(201).send({ review });
 		})
 		.catch((err) => {
 			next(err);

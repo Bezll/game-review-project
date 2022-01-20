@@ -39,6 +39,24 @@ describe("/api/categories", () => {
 				});
 		});
 	});
+	describe("POST", () => {
+		test("should return status 201 and the new categories", () => {
+			const newCategory = {
+				slug: "Test Category",
+				description: "This is a test description",
+			};
+			return request(app)
+				.post("/api/categories")
+				.send(newCategory)
+				.expect(201)
+				.then(({ body }) => {
+					expect(body.category).toEqual({
+						slug: "Test Category",
+						description: "This is a test description",
+					});
+				});
+		});
+	});
 });
 
 describe("/api/reviews/:review_id", () => {
@@ -271,7 +289,7 @@ describe("/api/reviews", () => {
 				});
 		});
 		describe("POST", () => {
-			test("should add a new review with the relevant properties", () => {
+			test("should add a new review with the relevant properties, and return this as the body", () => {
 				const newReview = {
 					title: "Test",
 					designer: "Test Designer",
@@ -284,7 +302,7 @@ describe("/api/reviews", () => {
 				return request(app)
 					.post("/api/reviews")
 					.send(newReview)
-					.expect(200)
+					.expect(201)
 					.then(({ body }) => {
 						expect(body.review).toEqual(
 							expect.objectContaining({
@@ -397,6 +415,20 @@ describe("/api/reviews/:review_id/comments", () => {
 						review_id: 1,
 						votes: 0,
 					});
+				});
+		});
+		test("should respond with a Status 400 when invalid author is used", () => {
+			const invalidAuthor = {
+				author: "Incorrect",
+				body: "This board game is good!",
+			};
+
+			return request(app)
+				.post("/api/reviews/1/comments")
+				.send(invalidAuthor)
+				.expect(400)
+				.then(({ body }) => {
+					expect(body.msg).toBe("Bad request");
 				});
 		});
 	});
