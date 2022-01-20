@@ -237,6 +237,7 @@ describe("/api/reviews", () => {
 						created_at: "2021-01-18T10:01:41.251Z",
 						votes: 10,
 						comment_count: 0,
+						total_count: 13,
 					});
 				});
 		});
@@ -278,6 +279,30 @@ describe("/api/reviews/:review_id/comments", () => {
 				.expect(404)
 				.then(({ body }) => {
 					expect(body.msg).toBe("Not found");
+				});
+		});
+		test("should return a limited number of results when specified using items_per_page", () => {
+			return request(app)
+				.get("/api/reviews/2/comments?items_per_page=2")
+				.expect(200)
+				.then(({ body }) => {
+					expect(body.comments.length).toBe(2);
+				});
+		});
+		test("Returns a specific page of results when specified along with a custom items_per_page limit", () => {
+			return request(app)
+				.get("/api/reviews/2/comments?items_per_page=2&&page=2")
+				.expect(200)
+				.then(({ body }) => {
+					expect(body.comments.length).toBe(1);
+					expect(body.comments[0]).toEqual({
+						comment_id: 5,
+						review_id: 2,
+						votes: 13,
+						created_at: "2021-01-18T10:24:05.410Z",
+						author: "mallionaire",
+						body: "Now this is a story all about how, board games turned my life upside down",
+					});
 				});
 		});
 	});

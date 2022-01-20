@@ -20,7 +20,7 @@ async function fetchReviewById(review_id) {
 exports.fetchMappedReviewsById = async (review_id) => {
 	const [reviewById, commentsById] = await Promise.all([
 		fetchReviewById(review_id),
-		fetchCommentsById(review_id), // Lives in model/comments.js
+		fetchCommentsById(review_id),
 	])
 		.then((result) => {
 			return result;
@@ -109,12 +109,17 @@ exports.fetchMappedReviews = async (
 ) => {
 	const [reviews, comments] = await Promise.all([
 		fetchReviews(sort_by, order, category, items_per_page, page),
-		fetchCommentsById(), // Lives in model/comments.js
+		fetchCommentsById(),
 	])
 		.then((result) => {
 			return result;
 		})
 		.catch((err) => Promise.reject(err));
+
+	let reviewCount;
+	await fetchReviews(sort_by, order, category).then((res) => {
+		reviewCount = res.length;
+	});
 
 	const newReviews = JSON.parse(JSON.stringify(reviews));
 
@@ -123,6 +128,9 @@ exports.fetchMappedReviews = async (
 			(comment) => comment.review_id === newReviews[i].review_id
 		);
 		newReviews[i].comment_count = commentCount.length;
+		console.log("ja", reviewCount);
+		newReviews[i].total_count = reviewCount;
 	}
+
 	return newReviews;
 };
