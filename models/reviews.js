@@ -128,7 +128,6 @@ exports.fetchMappedReviews = async (
 			(comment) => comment.review_id === newReviews[i].review_id
 		);
 		newReviews[i].comment_count = commentCount.length;
-		console.log("ja", reviewCount);
 		newReviews[i].total_count = reviewCount;
 	}
 

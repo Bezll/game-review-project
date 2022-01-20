@@ -220,7 +220,7 @@ describe("/api/reviews", () => {
 					expect(body.reviews.length).toBe(5);
 				});
 		});
-		test("Returns a specific page of results when specified along with a custom items_per_page limit", () => {
+		test("Returns a specific page of results when specified along with a custom items_per_page limit, does not effect review total_count", () => {
 			return request(app)
 				.get("/api/reviews?items_per_page=5&&page=2")
 				.expect(200)
@@ -238,6 +238,27 @@ describe("/api/reviews", () => {
 						votes: 10,
 						comment_count: 0,
 						total_count: 13,
+					});
+				});
+		});
+		test("should adjust the total_count based on the category filter applied", () => {
+			return request(app)
+				.get("/api/reviews?category=dexterity")
+				.expect(200)
+				.then(({ body }) => {
+					expect(body.reviews.length).toBe(1);
+					expect(body.reviews[0]).toEqual({
+						review_id: 2,
+						title: "Jenga",
+						designer: "Leslie Scott",
+						owner: "philippaclaire9",
+						review_img_url: expect.any(String),
+						review_body: expect.any(String),
+						category: "dexterity",
+						created_at: "2021-01-18T10:01:41.251Z",
+						votes: 5,
+						comment_count: 3,
+						total_count: 1,
 					});
 				});
 		});
