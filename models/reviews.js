@@ -1,5 +1,9 @@
 const db = require("../db/connection.js");
-const { fetchCommentsById, fetchComments } = require("./comments");
+const {
+	fetchCommentsById,
+	fetchComments,
+	removeComments,
+} = require("./comments");
 
 async function fetchReviewById(review_id) {
 	try {
@@ -99,6 +103,37 @@ async function fetchReviews(
 		return Promise.reject(err);
 	}
 }
+
+async function deleteReviewById(review_id) {
+	try {
+		return await db
+			.query(`DELETE FROM reviews WHERE review_id = $1;`, [review_id])
+			.then(({ rowCount }) => {
+				if (rowCount === 1) {
+					return;
+				} else {
+					return Promise.reject({ status: 404, msg: "Id not found" });
+				}
+			});
+	} catch (err) {
+		return Promise.reject(err);
+	}
+}
+
+exports.removeReviewAndComments = async (review_id) => {
+	const args = { review_id };
+	try {
+		await removeComments(args);
+	} catch (err) {
+		return Promise.reject({ status: 404, msg: "Id not found" });
+	}
+
+	try {
+		await deleteReviewById(review_id);
+	} catch (err) {
+		return Promise.reject({ status: 404, msg: "Id not found" });
+	}
+};
 
 exports.fetchMappedReviews = async (
 	sort_by,

@@ -44,17 +44,24 @@ exports.insertComments = async (review_id, newComment) => {
 	}
 };
 
-exports.removeComments = async (comment_id) => {
+exports.removeComments = async ({ comment_id, review_id }) => {
+	const queryParams = [comment_id];
+
+	let queryString = `DELETE FROM comments WHERE comment_id = $1;`;
+
+	if (review_id) {
+		queryString = `DELETE FROM comments WHERE review_id = $1`;
+		queryParams.shift();
+		queryParams.push(review_id);
+	}
 	try {
-		return await db
-			.query(`DELETE FROM comments WHERE comment_id = $1;`, [comment_id])
-			.then(({ rowCount }) => {
-				if (rowCount === 1) {
-					return;
-				} else {
-					return Promise.reject({ status: 404, msg: "Id not found" });
-				}
-			});
+		return await db.query(queryString, queryParams).then(({ rowCount }) => {
+			if (rowCount >= 1) {
+				return rowCount;
+			} else {
+				return Promise.reject({ status: 404, msg: "Id not found" });
+			}
+		});
 	} catch (err) {
 		return Promise.reject(err);
 	}

@@ -1,6 +1,7 @@
 const {
 	fetchMappedReviewsById,
 	updateReviewById,
+	removeReviewAndComments,
 	fetchMappedReviews,
 	insertReview,
 } = require("../models/reviews");
@@ -22,6 +23,19 @@ exports.patchReviewById = (req, res, next) => {
 	updateReviewById(review_id, inc_votes)
 		.then((review) => {
 			res.status(200).send({ review });
+		})
+		.catch((err) => {
+			next(err);
+		});
+};
+
+exports.deleteReviewById = (req, res, next) => {
+	const { review_id } = req.params;
+	removeReviewAndComments(review_id)
+		.then(() => {
+			res.status(204).send({
+				msg: "Review and comments deleted successfully",
+			});
 		})
 		.catch((err) => {
 			next(err);

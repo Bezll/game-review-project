@@ -91,37 +91,50 @@ describe("/api/reviews/:review_id", () => {
 					expect(body.msg).toBe("Not found");
 				});
 		});
-		describe("PATCH", () => {
-			test("should update the vote count in the specified review", () => {
-				return request(app)
-					.patch("/api/reviews/1")
-					.send({ inc_votes: 1 })
-					.expect(200)
-					.then(({ body }) => {
-						expect(body.review).toEqual(
-							expect.objectContaining({
-								review_id: 1,
-								title: "Agricola",
-								designer: "Uwe Rosenberg",
-								owner: "mallionaire",
-								review_img_url:
-									"https://www.golenbock.com/wp-content/uploads/2015/01/placeholder-user.png",
-								review_body: "Farmyard fun!",
-								category: "euro game",
-								created_at: "2021-01-18T10:00:20.514Z",
-								votes: 2,
-							})
-						);
-					});
-			});
-			test("Review_id is a valid request but non-existent", () => {
-				return request(app)
-					.patch("/api/reviews/1000000")
-					.expect(404)
-					.then(({ body }) => {
-						expect(body.msg).toBe("Not found");
-					});
-			});
+	});
+	describe("PATCH", () => {
+		test("should update the vote count in the specified review", () => {
+			return request(app)
+				.patch("/api/reviews/1")
+				.send({ inc_votes: 1 })
+				.expect(200)
+				.then(({ body }) => {
+					expect(body.review).toEqual(
+						expect.objectContaining({
+							review_id: 1,
+							title: "Agricola",
+							designer: "Uwe Rosenberg",
+							owner: "mallionaire",
+							review_img_url:
+								"https://www.golenbock.com/wp-content/uploads/2015/01/placeholder-user.png",
+							review_body: "Farmyard fun!",
+							category: "euro game",
+							created_at: "2021-01-18T10:00:20.514Z",
+							votes: 2,
+						})
+					);
+				});
+		});
+		test("Review_id is a valid request but non-existent", () => {
+			return request(app)
+				.patch("/api/reviews/1000000")
+				.expect(404)
+				.then(({ body }) => {
+					expect(body.msg).toBe("Not found");
+				});
+		});
+	});
+	describe("DELETE", () => {
+		test("should return status:204 and return deleted successfully message", () => {
+			return request(app).delete("/api/reviews/2").expect(204);
+		});
+		test("Should return status:404 when passed invalid review_id", () => {
+			return request(app)
+				.delete("/api/reviews/1000000")
+				.expect(404)
+				.then(({ body }) => {
+					expect(body.msg).toBe("Id not found");
+				});
 		});
 	});
 });
@@ -288,56 +301,56 @@ describe("/api/reviews", () => {
 					expect(body.msg).toBe("Not found");
 				});
 		});
-		describe("POST", () => {
-			test("should add a new review with the relevant properties, and return this as the body", () => {
-				const newReview = {
-					title: "Test",
-					designer: "Test Designer",
-					owner: "mallionaire",
-					review_body: "Test Text Body",
-					category: "euro game",
-					votes: 0,
-				};
+	});
+	describe("POST", () => {
+		test("should add a new review with the relevant properties, and return this as the body", () => {
+			const newReview = {
+				title: "Test",
+				designer: "Test Designer",
+				owner: "mallionaire",
+				review_body: "Test Text Body",
+				category: "euro game",
+				votes: 0,
+			};
 
-				return request(app)
-					.post("/api/reviews")
-					.send(newReview)
-					.expect(201)
-					.then(({ body }) => {
-						expect(body.review).toEqual(
-							expect.objectContaining({
-								review_id: 14,
-								title: "Test",
-								designer: "Test Designer",
-								owner: "mallionaire",
-								review_img_url:
-									"https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg",
-								review_body: "Test Text Body",
-								category: "euro game",
-								created_at: expect.any(String),
-								votes: 0,
-							})
-						);
-					});
-			});
-			test("should respond with a Status 400 when invalid username is used", () => {
-				const invalidUsername = {
-					title: "Test",
-					designer: "Test Designer",
-					owner: "incorrect",
-					review_body: "Test Text Body",
-					category: "euro game",
-					votes: 0,
-				};
+			return request(app)
+				.post("/api/reviews")
+				.send(newReview)
+				.expect(201)
+				.then(({ body }) => {
+					expect(body.review).toEqual(
+						expect.objectContaining({
+							review_id: 14,
+							title: "Test",
+							designer: "Test Designer",
+							owner: "mallionaire",
+							review_img_url:
+								"https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg",
+							review_body: "Test Text Body",
+							category: "euro game",
+							created_at: expect.any(String),
+							votes: 0,
+						})
+					);
+				});
+		});
+		test("should respond with a Status 400 when invalid username is used", () => {
+			const invalidUsername = {
+				title: "Test",
+				designer: "Test Designer",
+				owner: "incorrect",
+				review_body: "Test Text Body",
+				category: "euro game",
+				votes: 0,
+			};
 
-				return request(app)
-					.post("/api/reviews")
-					.send(invalidUsername)
-					.expect(400)
-					.then(({ body }) => {
-						expect(body.msg).toBe("Bad request");
-					});
-			});
+			return request(app)
+				.post("/api/reviews")
+				.send(invalidUsername)
+				.expect(400)
+				.then(({ body }) => {
+					expect(body.msg).toBe("Bad request");
+				});
 		});
 	});
 });
