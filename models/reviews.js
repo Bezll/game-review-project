@@ -133,3 +133,19 @@ exports.fetchMappedReviews = async (
 
 	return newReviews;
 };
+
+exports.insertReview = async (newReview) => {
+	const { owner, title, review_body, designer, category } = newReview;
+	try {
+		return await db
+			.query(
+				`INSERT INTO reviews (owner, title, review_body, designer, category) VALUES ($1, $2, $3, $4, $5) RETURNING *;`,
+				[owner, title, review_body, designer, category]
+			)
+			.then(({ rows }) => {
+				return rows[0];
+			});
+	} catch (err) {
+		return Promise.reject(err);
+	}
+};

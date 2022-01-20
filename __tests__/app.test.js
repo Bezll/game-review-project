@@ -270,6 +270,57 @@ describe("/api/reviews", () => {
 					expect(body.msg).toBe("Not found");
 				});
 		});
+		describe("POST", () => {
+			test("should add a new review with the relevant properties", () => {
+				const newReview = {
+					title: "Test",
+					designer: "Test Designer",
+					owner: "mallionaire",
+					review_body: "Test Text Body",
+					category: "euro game",
+					votes: 0,
+				};
+
+				return request(app)
+					.post("/api/reviews")
+					.send(newReview)
+					.expect(200)
+					.then(({ body }) => {
+						expect(body.review).toEqual(
+							expect.objectContaining({
+								review_id: 14,
+								title: "Test",
+								designer: "Test Designer",
+								owner: "mallionaire",
+								review_img_url:
+									"https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg",
+								review_body: "Test Text Body",
+								category: "euro game",
+								created_at: expect.any(String),
+								votes: 0,
+							})
+						);
+					});
+			});
+			test("should respond with a Status 400 when invalid username is used", () => {
+				const invalidUsername = {
+					title: "Test",
+					designer: "Test Designer",
+					owner: "incorrect",
+					review_body: "Test Text Body",
+					category: "euro game",
+					votes: 0,
+				};
+
+				return request(app)
+					.post("/api/reviews")
+					.send(invalidUsername)
+					.expect(400)
+					.then(({ body }) => {
+						expect(body.msg).toBe("Bad request");
+					});
+			});
+		});
 	});
 });
 
@@ -428,7 +479,7 @@ describe("/api/users/:username", () => {
 					);
 				});
 		});
-		test("Should return status:404 when passed username", () => {
+		test("Should return status:404 when passed invalid username", () => {
 			return request(app)
 				.get("/api/users/incorrect")
 				.expect(404)
