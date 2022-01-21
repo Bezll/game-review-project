@@ -1,14 +1,19 @@
 const db = require("../db/connection.js");
-const {
-	fetchCommentsById,
-	fetchComments,
-	removeComments,
-} = require("./comments");
+const { fetchCommentsById, removeComments } = require("./comments");
 
-async function fetchReviewById(review_id) {
+exports.fetchMappedReviewsById = async (review_id) => {
 	try {
 		return await db
-			.query(`SELECT * FROM reviews WHERE review_id = $1;`, [review_id])
+			.query(
+				`SELECT reviews.*,
+			COUNT(comment_id) AS comment_count 
+			FROM reviews 
+			LEFT JOIN comments
+			ON reviews.review_id = comments.review_id
+			WHERE reviews.review_id = $1
+			GROUP BY reviews.review_id;`,
+				[review_id]
+			)
 			.then(({ rows }) => {
 				if (rows.length > 0) {
 					return rows[0];
@@ -19,22 +24,6 @@ async function fetchReviewById(review_id) {
 	} catch (err) {
 		return Promise.reject(err);
 	}
-}
-
-exports.fetchMappedReviewsById = async (review_id) => {
-	const [reviewById, commentsById] = await Promise.all([
-		fetchReviewById(review_id),
-		fetchCommentsById(review_id),
-	])
-		.then((result) => {
-			return result;
-		})
-		.catch((err) => Promise.reject(err));
-
-	const mappedReviewById = JSON.parse(JSON.stringify(reviewById));
-	mappedReviewById.comment_count = commentsById.length;
-
-	return mappedReviewById;
 };
 
 exports.updateReviewById = async (review_id, inc_votes) => {
@@ -56,13 +45,13 @@ exports.updateReviewById = async (review_id, inc_votes) => {
 	}
 };
 
-async function fetchReviews(
+exports.fetchMappedReviews = async (
 	sort_by = "created_at",
 	order = "DESC",
 	category = "%",
 	items_per_page = 13,
 	page = 1
-) {
+) => {
 	const acceptableSortBys = [
 		"review_id",
 		"title",
@@ -81,9 +70,14 @@ async function fetchReviews(
 		return Promise.reject({ status: 400, msg: "Bad request" });
 	}
 
-	const sql = `SELECT 
-	* FROM reviews
+	const sql = `SELECT
+	reviews.*,
+	COUNT(comment_id) AS comment_count
+	FROM reviews
+	LEFT JOIN comments
+	ON reviews.review_id = comments.review_id
 	WHERE category ILIKE '${category}'
+	GROUP BY reviews.review_id
 	ORDER BY ${sort_by} ${order}
 	LIMIT $1
 	OFFSET $2
@@ -102,7 +96,7 @@ async function fetchReviews(
 	} catch (err) {
 		return Promise.reject(err);
 	}
-}
+};
 
 async function deleteReviewById(review_id) {
 	try {
@@ -135,39 +129,39 @@ exports.removeReviewAndComments = async (review_id) => {
 	}
 };
 
-exports.fetchMappedReviews = async (
-	sort_by,
-	order,
-	category,
-	items_per_page,
-	page
-) => {
-	const [reviews, comments] = await Promise.all([
-		fetchReviews(sort_by, order, category, items_per_page, page),
-		fetchCommentsById(),
-	])
-		.then((result) => {
-			return result;
-		})
-		.catch((err) => Promise.reject(err));
+// exports.fetchMappedReviews = async (
+// 	sort_by,
+// 	order,
+// 	category,
+// 	items_per_page,
+// 	page
+// ) => {
+// 	const [reviews, comments] = await Promise.all([
+// 		fetchReviews(sort_by, order, category, items_per_page, page),
+// 		fetchCommentsById(),
+// 	])
+// 		.then((result) => {
+// 			return result;
+// 		})
+// 		.catch((err) => Promise.reject(err));
 
-	let reviewCount;
-	await fetchReviews(sort_by, order, category).then((res) => {
-		reviewCount = res.length;
-	});
+// let reviewCount;
+// await fetchReviews(sort_by, order, category).then((res) => {
+// 	reviewCount = res.length;
+// });
 
-	const newReviews = JSON.parse(JSON.stringify(reviews));
+// 	const newReviews = JSON.parse(JSON.stringify(reviews));
 
-	for (let i = 0; i < newReviews.length; i++) {
-		const commentCount = comments.filter(
-			(comment) => comment.review_id === newReviews[i].review_id
-		);
-		newReviews[i].comment_count = commentCount.length;
-		newReviews[i].total_count = reviewCount;
-	}
+// 	for (let i = 0; i < newReviews.length; i++) {
+// 		const commentCount = comments.filter(
+// 			(comment) => comment.review_id === newReviews[i].review_id
+// 		);
+// 		newReviews[i].comment_count = commentCount.length;
+// 		newReviews[i].total_count = reviewCount;
+// 	}
 
-	return newReviews;
-};
+// 	return newReviews;
+// };
 
 exports.insertReview = async (newReview) => {
 	const { owner, title, review_body, designer, category } = newReview;

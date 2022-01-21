@@ -66,21 +66,19 @@ describe("/api/reviews/:review_id", () => {
 				.get("/api/reviews/2")
 				.expect(200)
 				.then(({ body }) => {
-					expect(body.review).toEqual(
-						expect.objectContaining({
-							review_id: 2,
-							title: "Jenga",
-							designer: "Leslie Scott",
-							owner: "philippaclaire9",
-							review_img_url:
-								"https://www.golenbock.com/wp-content/uploads/2015/01/placeholder-user.png",
-							review_body: "Fiddly fun for all the family",
-							category: "dexterity",
-							created_at: "2021-01-18T10:01:41.251Z",
-							votes: 5,
-							comment_count: 3,
-						})
-					);
+					expect(body.review).toEqual({
+						review_id: 2,
+						title: "Jenga",
+						designer: "Leslie Scott",
+						owner: "philippaclaire9",
+						review_img_url:
+							"https://www.golenbock.com/wp-content/uploads/2015/01/placeholder-user.png",
+						review_body: "Fiddly fun for all the family",
+						category: "dexterity",
+						created_at: "2021-01-18T10:01:41.251Z",
+						votes: 5,
+						comment_count: "3",
+					});
 				});
 		});
 		test("Review_id is a valid request but non-existent", () => {
@@ -148,20 +146,18 @@ describe("/api/reviews", () => {
 				.then(({ body }) => {
 					expect(body.reviews).toHaveLength(13);
 					body.reviews.forEach((review) => {
-						expect(review).toEqual(
-							expect.objectContaining({
-								review_id: expect.any(Number),
-								title: expect.any(String),
-								designer: expect.any(String),
-								owner: expect.any(String),
-								review_img_url: expect.any(String),
-								review_body: expect.any(String),
-								category: expect.any(String),
-								created_at: expect.any(String),
-								votes: expect.any(Number),
-								comment_count: expect.any(Number),
-							})
-						);
+						expect(review).toEqual({
+							review_id: expect.any(Number),
+							title: expect.any(String),
+							designer: expect.any(String),
+							owner: expect.any(String),
+							review_img_url: expect.any(String),
+							review_body: expect.any(String),
+							category: expect.any(String),
+							created_at: expect.any(String),
+							votes: expect.any(Number),
+							comment_count: expect.any(String),
+						});
 					});
 				});
 		});
@@ -258,17 +254,17 @@ describe("/api/reviews", () => {
 				.then(({ body }) => {
 					expect(body.reviews.length).toBe(5);
 					expect(body.reviews[0]).toEqual({
-						review_id: 10,
-						title: "Build you own tour de Yorkshire",
-						designer: "Asger Harding Granerud",
+						review_id: 9,
+						title: "A truly Quacking Game; Quacks of Quedlinburg",
+						designer: "Wolfgang Warsch",
 						owner: "mallionaire",
 						review_img_url: expect.any(String),
 						review_body: expect.any(String),
 						category: "social deduction",
-						created_at: "2021-01-18T10:01:41.251Z",
+						created_at: "2021-01-18T10:01:41.254Z",
 						votes: 10,
-						comment_count: 0,
-						total_count: 13,
+						comment_count: "0",
+						// total_count: 13,
 					});
 				});
 		});
@@ -288,7 +284,7 @@ describe("/api/reviews", () => {
 						category: "dexterity",
 						created_at: "2021-01-18T10:01:41.251Z",
 						votes: 5,
-						comment_count: 3,
+						comment_count: "3",
 						total_count: 1,
 					});
 				});

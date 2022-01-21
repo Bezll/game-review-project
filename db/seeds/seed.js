@@ -90,9 +90,6 @@ const seed = async (data) => {
 		formattedComments
 	);
 	await db.query(sql4);
-
-	const result = await db.query(`SELECT * FROM comments`);
-	// console.log(result.rows);
 };
 
 module.exports = seed;
