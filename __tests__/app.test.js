@@ -252,6 +252,7 @@ describe("/api/reviews", () => {
 				.get("/api/reviews?items_per_page=5&&page=2")
 				.expect(200)
 				.then(({ body }) => {
+					console.log(body.reviews);
 					expect(body.reviews.length).toBe(5);
 					expect(body.reviews[0]).toEqual({
 						review_id: 9,
@@ -264,15 +265,16 @@ describe("/api/reviews", () => {
 						created_at: "2021-01-18T10:01:41.254Z",
 						votes: 10,
 						comment_count: "0",
-						// total_count: 13,
+						total_count: 13,
 					});
 				});
 		});
-		test("should adjust the total_count based on the category filter applied", () => {
+		test.only("should adjust the total_count based on the category filter applied", () => {
 			return request(app)
 				.get("/api/reviews?category=dexterity")
 				.expect(200)
 				.then(({ body }) => {
+					console.log(body.reviews, "showme");
 					expect(body.reviews.length).toBe(1);
 					expect(body.reviews[0]).toEqual({
 						review_id: 2,

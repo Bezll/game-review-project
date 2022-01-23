@@ -49,8 +49,8 @@ exports.fetchMappedReviews = async (
 	sort_by = "created_at",
 	order = "DESC",
 	category = "%",
-	items_per_page = 13,
-	page = 1
+	items_per_page,
+	page
 ) => {
 	const acceptableSortBys = [
 		"review_id",
@@ -70,7 +70,7 @@ exports.fetchMappedReviews = async (
 		return Promise.reject({ status: 400, msg: "Bad request" });
 	}
 
-	const sql = `SELECT
+	let sql = `SELECT
 	reviews.*,
 	COUNT(comment_id) AS comment_count
 	FROM reviews
@@ -78,21 +78,26 @@ exports.fetchMappedReviews = async (
 	ON reviews.review_id = comments.review_id
 	WHERE category ILIKE '${category}'
 	GROUP BY reviews.review_id
-	ORDER BY ${sort_by} ${order}
-	LIMIT $1
-	OFFSET $2
-	;`;
+	ORDER BY ${sort_by} ${order}`;
+
+	let queryParams = [];
+
+	if (items_per_page && page) {
+		sql += ` LIMIT $1
+		OFFSET $2;`;
+		queryParams = [items_per_page, (page - 1) * items_per_page];
+	}
+
+	// do separate query for total count then call it in if statement
 
 	try {
-		return await db
-			.query(sql, [items_per_page, (page - 1) * items_per_page])
-			.then(({ rows }) => {
-				if (rows.length > 0) {
-					return rows;
-				} else {
-					return Promise.reject({ status: 404, msg: "Not found" });
-				}
-			});
+		return await db.query(sql, queryParams).then(({ rows }) => {
+			if (rows.length > 0) {
+				return rows;
+			} else {
+				return Promise.reject({ status: 404, msg: "Not found" });
+			}
+		});
 	} catch (err) {
 		return Promise.reject(err);
 	}
