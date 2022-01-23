@@ -1,5 +1,6 @@
+const swaggerUI = require("swagger-ui-express");
+const swaggerJsDoc = require("swagger-jsdoc");
 const express = require("express");
-const { getApiOptions } = require("./controllers/api-options");
 const { getCategories, postCategory } = require("./controllers/categories");
 const { getUsers, getUsersByUsername } = require("./controllers/users");
 const {
@@ -22,10 +23,28 @@ const {
 	handleServerErrors,
 } = require("./errors/errors");
 
+const options = {
+	definition: {
+		openapi: "3.0.0",
+		info: {
+			title: "Game API",
+			version: "1.0.0",
+			description: "A simple Express Game API",
+		},
+		servers: [
+			{
+				url: "http://localhost:9090",
+			},
+		],
+	},
+	apis: ["./app.js"],
+};
+const specs = swaggerJsDoc(options);
+
 const app = express();
 app.use(express.json());
 
-app.get("/api", getApiOptions);
+app.use("/api", swaggerUI.serve, swaggerUI.setup(specs));
 
 app.get("/api/categories", getCategories);
 app.post("/api/categories", postCategory);

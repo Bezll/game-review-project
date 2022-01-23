@@ -25,7 +25,9 @@
 		"dotenv": "^14.1.0",
 		"express": "^4.17.2",
 		"pg": "^8.7.1",
-		"pg-format": "^1.0.4"
+		"pg-format": "^1.0.4",
+		"swagger-jsdoc": "^6.1.0",
+		"swagger-ui-express": "^4.3.0"
 	},
 	"devDependencies": {
 		"jest": "^27.4.7",
