@@ -1,4 +1,4 @@
-const swaggerUI = require("swagger-ui-express"); //<< generate swagger UI
+const swaggerUI = require("swagger-ui-express");
 const express = require("express");
 const { getCategories, postCategory } = require("./controllers/categories");
 const { getUsers, getUsersByUsername } = require("./controllers/users");
