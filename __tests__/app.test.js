@@ -14,7 +14,7 @@ describe("/api", () => {
 				.get("/api")
 				.expect(200)
 				.then(({ body }) => {
-					expect(Object.keys(body.endpoints)).toHaveLength(7);
+					expect(Object.keys(body.endpoints)).toHaveLength(14);
 				});
 		});
 	});

@@ -30,11 +30,11 @@ app.get("/api", getApiOptions);
 app.get("/api/categories", getCategories);
 app.post("/api/categories", postCategory);
 
+app.get("/api/reviews", getReviews);
+app.post("/api/reviews", postReview);
 app.get("/api/reviews/:review_id", getReviewById);
 app.patch("/api/reviews/:review_id", patchReviewById);
 app.delete("/api/reviews/:review_id", deleteReviewById);
-app.get("/api/reviews", getReviews);
-app.post("/api/reviews", postReview);
 
 app.get("/api/reviews/:review_id/comments", getComments);
 app.post("/api/reviews/:review_id/comments", postComments);
