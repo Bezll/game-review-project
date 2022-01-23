@@ -143,40 +143,6 @@ exports.removeReviewAndComments = async (review_id) => {
 	}
 };
 
-// exports.fetchMappedReviews = async (
-// 	sort_by,
-// 	order,
-// 	category,
-// 	items_per_page,
-// 	page
-// ) => {
-// 	const [reviews, comments] = await Promise.all([
-// 		fetchReviews(sort_by, order, category, items_per_page, page),
-// 		fetchCommentsById(),
-// 	])
-// 		.then((result) => {
-// 			return result;
-// 		})
-// 		.catch((err) => Promise.reject(err));
-
-// let reviewCount;
-// await fetchReviews(sort_by, order, category).then((res) => {
-// 	reviewCount = res.length;
-// });
-
-// 	const newReviews = JSON.parse(JSON.stringify(reviews));
-
-// 	for (let i = 0; i < newReviews.length; i++) {
-// 		const commentCount = comments.filter(
-// 			(comment) => comment.review_id === newReviews[i].review_id
-// 		);
-// 		newReviews[i].comment_count = commentCount.length;
-// 		newReviews[i].total_count = reviewCount;
-// 	}
-
-// 	return newReviews;
-// };
-
 exports.insertReview = async (newReview) => {
 	const { owner, title, review_body, designer, category } = newReview;
 	try {
