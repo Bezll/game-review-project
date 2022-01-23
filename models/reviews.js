@@ -85,19 +85,24 @@ exports.fetchMappedReviews = async (
 
 	// do separate query for total count then call it in if statement
 
-	const totalCount = `SELECT
-    COUNT(*) AS total_count
+	const totalCountSql = `SELECT *
     FROM reviews
     WHERE category ILIKE '${category}'
-    GROUP BY review_id;
-`;
+    GROUP BY review_id;`;
+	let test = await db.query(totalCountSql).then(({ rows }) => {
+		return rows.length;
+	});
 
 	try {
 		return await db
 			.query(sql, [items_per_page, (page - 1) * items_per_page])
 			.then(({ rows }) => {
 				if (rows.length > 0) {
-					return rows;
+					const copyRows = JSON.parse(JSON.stringify(rows));
+					copyRows.forEach((review) => {
+						review.total_count = test;
+					});
+					return copyRows;
 				} else {
 					return Promise.reject({ status: 404, msg: "Not found" });
 				}
