@@ -1,5 +1,5 @@
+const swaggerUI = require("swagger-ui-express"); //<< generate swagger UI
 const express = require("express");
-const { getApiOptions } = require("./controllers/api-options");
 const { getCategories, postCategory } = require("./controllers/categories");
 const { getUsers, getUsersByUsername } = require("./controllers/users");
 const {
@@ -22,10 +22,12 @@ const {
 	handleServerErrors,
 } = require("./errors/errors");
 
+const swaggerDocument = require("./swagger.json");
+
 const app = express();
 app.use(express.json());
 
-app.get("/api", getApiOptions);
+app.use("/api", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 app.get("/api/categories", getCategories);
 app.post("/api/categories", postCategory);
