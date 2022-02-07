@@ -1,3 +1,4 @@
+const cors = require("cors");
 const express = require("express");
 const { getApiOptions } = require("./controllers/api-options");
 const { getCategories, postCategory } = require("./controllers/categories");
@@ -23,6 +24,7 @@ const {
 } = require("./errors/errors");
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 app.get("/api", getApiOptions);
