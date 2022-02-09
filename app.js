@@ -40,8 +40,8 @@ app.delete("/api/reviews/:review_id", deleteReviewById);
 
 app.get("/api/reviews/:review_id/comments", getComments);
 app.post("/api/reviews/:review_id/comments", postComments);
-app.delete("/api/comments/:comment_id", deleteComments);
-app.patch("/api/comments/:comment_id", patchComments);
+app.delete("/api/reviews/comments/:comment_id", deleteComments);
+app.patch("/api/reviews/comments/:comment_id", patchComments);
 
 app.get("/api/users", getUsers);
 app.get("/api/users/:username", getUsersByUsername);
