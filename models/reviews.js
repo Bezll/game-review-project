@@ -1,5 +1,5 @@
 const db = require("../db/connection.js");
-const { fetchCommentsById, removeComments } = require("./comments");
+const { fetchCommentsById, removeCommentsForReview } = require("./comments");
 
 exports.fetchMappedReviewsById = async (review_id) => {
 	try {
@@ -131,7 +131,7 @@ async function deleteReviewById(review_id) {
 exports.removeReviewAndComments = async (review_id) => {
 	const args = { review_id };
 	try {
-		await removeComments(args);
+		await removeCommentsForReview(args);
 	} catch (err) {
 		return Promise.reject({ status: 404, msg: "Id not found" });
 	}
@@ -142,40 +142,6 @@ exports.removeReviewAndComments = async (review_id) => {
 		return Promise.reject({ status: 404, msg: "Id not found" });
 	}
 };
-
-// exports.fetchMappedReviews = async (
-// 	sort_by,
-// 	order,
-// 	category,
-// 	items_per_page,
-// 	page
-// ) => {
-// 	const [reviews, comments] = await Promise.all([
-// 		fetchReviews(sort_by, order, category, items_per_page, page),
-// 		fetchCommentsById(),
-// 	])
-// 		.then((result) => {
-// 			return result;
-// 		})
-// 		.catch((err) => Promise.reject(err));
-
-// let reviewCount;
-// await fetchReviews(sort_by, order, category).then((res) => {
-// 	reviewCount = res.length;
-// });
-
-// 	const newReviews = JSON.parse(JSON.stringify(reviews));
-
-// 	for (let i = 0; i < newReviews.length; i++) {
-// 		const commentCount = comments.filter(
-// 			(comment) => comment.review_id === newReviews[i].review_id
-// 		);
-// 		newReviews[i].comment_count = commentCount.length;
-// 		newReviews[i].total_count = reviewCount;
-// 	}
-
-// 	return newReviews;
-// };
 
 exports.insertReview = async (newReview) => {
 	const { owner, title, review_body, designer, category } = newReview;

@@ -131,6 +131,7 @@ describe("/api/reviews/:review_id", () => {
 				.delete("/api/reviews/1000000")
 				.expect(404)
 				.then(({ body }) => {
+					console.log("showme", body);
 					expect(body.msg).toBe("Id not found");
 				});
 		});
@@ -311,7 +312,7 @@ describe("/api/reviews", () => {
 			};
 
 			return request(app)
-				.post("/api/reviews")
+				.post("/api/review")
 				.send(newReview)
 				.expect(201)
 				.then(({ body }) => {
@@ -342,7 +343,7 @@ describe("/api/reviews", () => {
 			};
 
 			return request(app)
-				.post("/api/reviews")
+				.post("/api/review")
 				.send(invalidUsername)
 				.expect(400)
 				.then(({ body }) => {
@@ -444,11 +445,11 @@ describe("/api/reviews/:review_id/comments", () => {
 	});
 	describe("DELETE", () => {
 		test("should return status:204 and return Comment deleted successfully message", () => {
-			return request(app).delete("/api/comments/1").expect(204);
+			return request(app).delete("/api/reviews/comments/1").expect(204);
 		});
 		test("Should return status:404 when passed invalid comment_id", () => {
 			return request(app)
-				.delete("/api/comments/1000")
+				.delete("/api/reviews/comments/1000")
 				.expect(404)
 				.then(({ body }) => {
 					expect(body.msg).toBe("Id not found");
@@ -458,7 +459,7 @@ describe("/api/reviews/:review_id/comments", () => {
 	describe("PATCH", () => {
 		test("should increment the votes count by the specified amount", () => {
 			return request(app)
-				.patch("/api/comments/1")
+				.patch("/api/reviews/comments/1")
 				.send({ inc_votes: 1 })
 				.expect(200)
 				.then(({ body }) => {
@@ -476,7 +477,7 @@ describe("/api/reviews/:review_id/comments", () => {
 		});
 		test("Should return status:404 when passed invalid comment_id", () => {
 			return request(app)
-				.patch("/api/comments/1000")
+				.patch("/api/reviews/comments/1000")
 				.expect(404)
 				.then(({ body }) => {
 					expect(body.msg).toBe("Id not found");
