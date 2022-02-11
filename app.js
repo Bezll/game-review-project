@@ -33,7 +33,7 @@ app.get("/api/categories", getCategories);
 app.post("/api/categories", postCategory);
 
 app.get("/api/reviews", getReviews);
-app.post("/api/reviews", postReview);
+app.post("/api/review", postReview);
 app.get("/api/reviews/:review_id", getReviewById);
 app.patch("/api/reviews/:review_id", patchReviewById);
 app.delete("/api/reviews/:review_id", deleteReviewById);

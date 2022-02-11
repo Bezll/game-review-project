@@ -45,7 +45,7 @@
 			]
 		}
 	},
-	"POST /api/reviews": {
+	"POST /api/review": {
 		"description": "posts a new review",
 		"queries": [],
 		"exampleResponse": {
