@@ -1,6 +1,8 @@
 Board-Game-review Back-End Project
 This project has been setup to build the API endpoints for the Board Game review Front-End project, which interacts with a PSQL database.
 
+The frontend of this project can be found here - https://github.com/Bezll/nc-games
+
 🌟 Getting Started
 You will need to follow the instructions below to navigate through this repo.
 
