@@ -1,29 +1,25 @@
-Board-Game-review Back-End Project
-This project has been setup to build the API endpoints for the Board Game review Front-End project, which interacts with a PSQL database.
+# Board-Game-review Backend Project
+
+This project is the backend for the Herd App, our final team project carried out at Northcoders.
+The Herd app is a gig finding application, that allows people to find live music events in their area, listen to the music, send reminders and chat with other participants
+
+This project is the backend for the Board Game review site, a independent project carried out at Northcoders.
+This repository servers the API endpoints for the Board Game review Frontend project, which interacts with a PSQL database.
 
 The frontend of this project can be found here - https://github.com/Bezll/nc-games
+This server has been hosted using Heroku. You can find it here - https://nc-game-reviews-project.herokuapp.com/api
 
-🌟 Getting Started
-You will need to follow the instructions below to navigate through this repo.
+## Stack
 
-📜 Prerequisites
-This project has been built on the following versions of software and libraries.
+Javascript, PSQL, Express.js, Node.js
 
-node v17.1.0
-postgreSQL v14.1
-express v4.17.2
-dotenv v14.1.0
-pg v8.7.1
-pg-format v1.0.4
+## Installation
 
-💡 Install
-git clone https://github.com/Bezll/be-nc-games.git
+Use the package manager npm to install this project.
 
-In your terminal, cd into the cloned repo.
-
-cd be-nc-games
-
-npm install
+```bash
+npm i
+```
 
 In the root directory please create two .env files:
 
@@ -34,20 +30,34 @@ Inside the .env.development file please add PGDATABASE=nc_games.
 
 Inside the .env.test file please add PGDATABASE=nc_games_test
 
-Now, everything you need is installed.✨
+## To Run
 
-🚀 Running the tests
+To initialise the database.
 
-To initialise the database please run - npm setup-dbs.
+```bash
+npm setup-dbs
+```
 
-Then to seed the database please run - npm seed.
+To seed the database.
 
-If you wish to run the endpoint on a local machine please run - npm start.
+```bash
+npm seed
+```
 
-To run the test suite I have created please run - npm test.
+If you wish to run the endpoint on a local machine.
 
-🏠 Hosted Site
-This server has been hosted using Heroku. You can find it here - https://nc-game-reviews-project.herokuapp.com/api
+```bash
+npm start
+```
+
+To run the test suite I have created.
+
+```bash
+npm test
+```
 
 👏Acknowledgments
 Built under guidance and with help from the Northcoders Team.
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
