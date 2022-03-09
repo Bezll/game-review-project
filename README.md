@@ -56,8 +56,8 @@ To run the test suite I have created.
 npm test
 ```
 
-👏Acknowledgments
-Built under guidance and with help from the Northcoders Team.
-
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
+
+👏Acknowledgments
+Built under guidance and with help from the Northcoders Team.
