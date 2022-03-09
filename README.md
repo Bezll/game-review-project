@@ -1,4 +1,4 @@
-# Board-Game-review Backend Project
+# Game-Board Backend Project
 
 This project is the backend for the Herd App, our final team project carried out at Northcoders.
 The Herd app is a gig finding application, that allows people to find live music events in their area, listen to the music, send reminders and chat with other participants
